@@ -1,0 +1,16 @@
+*.swp
+*.swo
+*~
+.DS_Store
+.idea
+.vscode
+*.iml
+target/
+.cpcache/
+.nrepl-port
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.local

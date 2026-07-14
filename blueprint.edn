@@ -1,0 +1,11 @@
+{:itonami.blueprint/id "cloud-itonami-isco-3132"
+ :itonami.blueprint/name "Incinerator and Water Treatment Plant Operations Coordination"
+ :itonami.blueprint/isco-08 "3132"
+ :itonami.blueprint/domain :water/treatment
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:environmental-safety :public-health :water-quality :waste-management]
+ :itonami.blueprint/governor :treatment-ops-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger :telemetry]
+ :itonami.blueprint/optional-technologies [:optimization]
+ :itonami.blueprint/status :public-oss}
