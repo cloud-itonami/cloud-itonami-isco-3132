@@ -70,7 +70,8 @@
                                     :payload proposal}]
                        (store/commit-record! store record)
                        (store/append-ledger! store {:disposition :commit :record record})
-                       {:record record
+                       {:disposition :commit
+                        :record record
                         :audit [{:node :commit :record record}]})))
       (g/add-node :hold
                    (fn [{:keys [verdict]}]
