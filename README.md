@@ -76,10 +76,10 @@ Full itonami Actor pattern (per ADR-2607011000 / CLAUDE.md's Actors section), al
 
 ### Implementation modules
 
-- `src/treatment_ops/store.cljc` — `Store` protocol + `MemStore`: registered plants/units, committed records, append-only audit ledger.
-- `src/treatment_ops/advisor.cljc` — `Advisor` protocol; `mock-advisor` (deterministic, default) proposes a treatment operations coordination action from a request; `llm-advisor` wraps a `langchain.model/ChatModel` — either way the advisor only ever produces a `:propose`-effect proposal, never a committed record, and LLM parse failures always yield `confidence 0.0` (forces escalation, never fabricated confidence).
-- `src/treatment_ops/governor.cljc` — `TreatmentOpsGovernor/check`: a pure function, wired as its own `:govern` node. Hard invariants (unregistered/unverified plant, a proposal whose `:effect` isn't `:propose`, or combustion/chemical/emergency-shutdown commands) always route to `:hold`. Escalation invariants (`:flag-anomalous-reading`, or low advisor confidence) always route to `:request-approval` — an `interrupt-before` node that the graph checkpoints and only resumes on explicit human approval (`actor/approve!`).
-- `src/treatment_ops/actor.cljc` — `build-graph`, `run-request!`, `approve!`: the `langgraph.graph/state-graph` wiring itself.
+- `src/treatment_ops/store.kotoba` — `Store` protocol + `MemStore`: registered plants/units, committed records, append-only audit ledger.
+- `src/treatment_ops/advisor.kotoba` — `Advisor` protocol; `mock-advisor` (deterministic, default) proposes a treatment operations coordination action from a request; `llm-advisor` wraps a `langchain.model/ChatModel` — either way the advisor only ever produces a `:propose`-effect proposal, never a committed record, and LLM parse failures always yield `confidence 0.0` (forces escalation, never fabricated confidence).
+- `src/treatment_ops/governor.kotoba` — `TreatmentOpsGovernor/check`: a pure function, wired as its own `:govern` node. Hard invariants (unregistered/unverified plant, a proposal whose `:effect` isn't `:propose`, or combustion/chemical/emergency-shutdown commands) always route to `:hold`. Escalation invariants (`:flag-anomalous-reading`, or low advisor confidence) always route to `:request-approval` — an `interrupt-before` node that the graph checkpoints and only resumes on explicit human approval (`actor/approve!`).
+- `src/treatment_ops/actor.kotoba` — `build-graph`, `run-request!`, `approve!`: the `langgraph.graph/state-graph` wiring itself.
 
 ```bash
 clojure -M:test
