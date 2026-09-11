@@ -15,7 +15,7 @@ We welcome contributions! This document provides guidance on how to contribute.
 3. Add tests in `test/plant_ops/` for any new functionality.
 4. Run tests:
    ```bash
-   clojure -M:test
+   kbb -M:test
    ```
 5. Ensure all tests pass before opening a PR.
 
