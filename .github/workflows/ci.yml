@@ -20,4 +20,4 @@ jobs:
       - uses: DeLaGuardo/setup-clojure@13.4
         with: { cli: latest }
       - name: test
-        run: clojure -M:test
+        run: kbb -M:test
