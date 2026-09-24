@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a telemetry-monitoring robot performs routine
+;; treatment readings, maintenance scheduling and anomalous-condition flagging
+;; for incinerator and water treatment plant operators (ISCO 3132). Its
+;; physical work is reading the incinerator casing temperature (which the
+;; refractory lining sets) and running the treated-water sample pump line.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-3132"
+ :cases
+ [{:id :incinerator-casing
+   :kind :thermal
+   :procedure "incinerator hot face at 900 C behind an insulating-firebrick lining; the robot reads the steel casing after a week of firing"
+   :params {:conductivity-w-mk 0.3 :density-kg-m3 800.0 :specific-heat-j-kgk 1000.0
+            :t0-c 30.0 :t-hot-c 900.0 :front-fixed? true :t-back-ambient-c 30.0 :h-back-w-m2k 10.0
+            :threshold-c 120.0 :duration-s 604800.0 :nodes 11}
+   :sweep {:param :thickness-m :values [0.15 0.20 0.25 0.30 0.40]}
+   :quantity :final-back-c
+   :limit {:max 120.0 :basis "estimate: casing reading above which a lining hot spot is flagged for maintenance"}
+   :boundary {:lo 0.05 :hi 0.60}}
+  {:id :treated-water-sample-line
+   :kind :pipe-flow
+   :procedure "sample pump pushes treated water through 60 m of 20 mm line to the on-line analyser"
+   :params {:diameter-m 0.02 :length-m 60.0 :roughness-m 1.5e-6
+            :density-kg-m3 998.0 :viscosity-pa-s 1.0e-3 :pump-efficiency 0.5}
+   :sweep {:param :q-m3s :values [2.0e-4 4.0e-4 6.0e-4 8.0e-4 1.0e-3]}
+   :quantity :head-m
+   :limit {:max 25.0 :basis "estimate: rated head of a small sample pump"}
+   :boundary {:lo 1.0e-5 :hi 2.0e-3}}]}
