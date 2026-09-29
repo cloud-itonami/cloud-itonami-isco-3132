@@ -48,7 +48,7 @@ See [`docs/business-model.md`](docs/business-model.md) and [`docs/operator-guide
 
 ## Reference implementation (`:maturity :implemented`)
 
-Full itonami Actor pattern (per ADR-2607011000 / CLAUDE.md's Actors section), alongside `cloud-itonami-isco-3131`, `-isco-2411`, `-isco-2166`, and others: a real [`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgraph) `StateGraph`, with the Advisor and Governor as distinct graph nodes and human-in-the-loop interrupt/resume via checkpointing.
+Full itonami Actor pattern (per ADR-2607011000 / AGENTS.md's Actors section), alongside `cloud-itonami-isco-3131`, `-isco-2411`, `-isco-2166`, and others: a real [`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgraph) `StateGraph`, with the Advisor and Governor as distinct graph nodes and human-in-the-loop interrupt/resume via checkpointing.
 
 ```text
 :intake -> :advise -> :govern -> :decide -+-> :commit            (:ok? true)
