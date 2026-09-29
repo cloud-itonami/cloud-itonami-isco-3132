@@ -1,7 +1,7 @@
 (ns treatment-ops.actor
   "TreatmentOpsActor — the ISCO-08 3132 incinerator and water treatment
   plant operations coordination actor as a `langgraph.graph/state-graph`
-  (per ADR-2607011000 / CLAUDE.md Actors section). One graph run = one
+  (per ADR-2607011000 / AGENTS.md Actors section). One graph run = one
   operations coordination request (intake → advise → govern → decide →
   commit/hold, with a human-approval interrupt for escalated proposals).
   No infinite internal loop; checkpointed per superstep so an interrupted
